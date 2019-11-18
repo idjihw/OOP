@@ -21,7 +21,7 @@ shared_ref::shared_ref(student* student) {
 		ptr_map[student] = this->_mgr;
 
 	} else {
-		ptr_map[student] = empty_mgr;
+		this->_mgr = empty_mgr;
 	}
 
 	
