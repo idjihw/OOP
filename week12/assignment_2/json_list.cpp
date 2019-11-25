@@ -4,29 +4,24 @@
 #include "data/Integer.h"
 #include "data/String.h"
 
-json_list::json_list()
-{
+json_list::json_list(){
 	v = std::vector<json_object*>();
 }
 
-json_object* json_list::parse(const char* str, int length)
-{
+json_object* json_list::parse(const char* str, int length){
 	int& _pos = json_object::_index;
 	
 	json_object* tmp_val = NULL;
 	json_list* tmp_list = new json_list();
 
-	while (_pos < length)
-	{
-		switch (str[_pos])
-		{
+	while (_pos < length){
+		switch (str[_pos]){
 		case '\'':
 			++_pos;
 			tmp_val = String::parse(str, length, '\'');
 			break;
 		case ',':
-			if (tmp_val != NULL)
-			{
+			if (tmp_val != NULL){
 				tmp_list->v.push_back(tmp_val);
 				tmp_val = NULL;
 			}
@@ -54,24 +49,20 @@ json_object* json_list::parse(const char* str, int length)
 	return NULL;
 }
 
-json_object* json_list::operator[](int key) const
-{
+json_object* json_list::operator[](int key) const{
 	return v[key];
 }
 
-json_object::_type json_list::type()
-{
+json_object::_type json_list::type(){
 	return json_object::LIST;
 }
 
-std::string json_list::to_string()
-{
+std::string json_list::to_string(){
 	std::string _res = "[";
 	if (v.size() == 0)
 		return "[]";
 
-	for (int i = 0; i < v.size() - 1; i++)
-	{
+	for (int i = 0; i < v.size() - 1; i++){
 		_res += v[i]->to_string() + ", ";
 	}
 	
