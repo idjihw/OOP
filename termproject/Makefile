@@ -1,0 +1,14 @@
+.SUFFIXES: .cpp .o
+
+OBJECTS = array_2d.o big_block.o block.o color_block.o cross_block.o fold_block.o tree_block.o
+MAIN = main.o $(OBJECTS)
+
+CXX = g++
+
+TARGET = test
+
+$(TARGET) : $(MAIN)
+	$(CXX) -o $(TARGET) $(MAIN)
+
+clean :
+	rm -rf $(MAIN) $(TARGET)
